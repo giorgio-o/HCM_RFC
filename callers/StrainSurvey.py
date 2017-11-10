@@ -5,7 +5,7 @@ import time
 from ceppa import StrainSurveyExperiment 
 # from ceppa.visualizations import position_density
 from ceppa.visualizations import rasters, raster_mouseday
-from ceppa.visualizations import features_panel_CT_QC, some_features_stats_R01          #, feat_vs_feat, feat_vs_feat_correlation, features_distribution
+from ceppa.visualizations import features_panel_CT_QC, SS_features_correlation_R01          #, feat_vs_feat, feat_vs_feat_correlation, features_distribution
 # from ceppa.visualizations import breakfast, breakfast_cycles, within_AS_structure, time_budgets
 # from ceppa.visualizations import PCA_analysis
 # from ceppa.util import write_to_csv
@@ -153,7 +153,7 @@ E = StrainSurveyExperiment.StrainSurveyExperiment()
 # features_panel_CT.write_feature_vector_mouse_avgs_12bins_to_csv(E, bin_type='12bins', level='mouse')
 
 # # # for NIH - R01 grant, October 2017
-some_features_stats_R01.correlation_pairs_SS(E)
+SS_features_correlation_R01.correlation_pairs_SS(E)
 
 
 # old

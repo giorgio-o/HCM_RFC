@@ -70,12 +70,13 @@ def get_AS_vector(self, feat, bin_type='12bins'):
         bin0: 13.00-15.00 or CT06-08 
     """    
     tbins = get_CT_bins(bin_type, self.experiment.BIN_SHIFT, self.experiment.binTimeShift)       # tbins do not have anything outside CT [6, 30]
-    arr = np.zeros(len(tbins))
-    b = 0
-    for tbin in tbins:
-        arr[b] = self.get_AS_feature_value(feat, tbin)
-        b +=1  
-    return arr
+    # arr = np.zeros(len(tbins))
+    # b = 0
+    vect = [self.get_AS_feature_value(feat, tbin) for tbin in tbins]
+    # for tbin in tbins:
+    #     arr[b] = self.get_AS_feature_value(feat, tbin)
+    #     b +=1  
+    return vect
 
 
 def get_AS_intensity_vector(self, feat, bin_type='12bins', atype='abs'):#, TEST=True):

@@ -34,7 +34,7 @@ class Experiment(object):
         self.FULLNAME = FULLNAME
         self.use_days = use_days
         self.BIN_SHIFT = BIN_SHIFT
-
+        
         self.add_directories()
         experiment_variables.add_variables_to_experiment(self)
         plot_settings.get_settings(self)
@@ -578,6 +578,23 @@ class Experiment(object):
         return data, labels
 
 
+    def get_bodyweights(self):
+        # get bodyweight for the dataset
+        print "--Exp: %s, %s, getting bodyweight -pre/-post/-gain " %(
+                self.short_name, self.get_bodyweights.__name__, )
+
+        bws, labels = [], []
+        for group in self.groups:
+            for mouse in group.individuals:
+                if mouse.ignored:
+                    bws.append([np.nan, np.nan, np.nan])
+                else:
+                    bw_start, bw_end = mouse.body_weight_start_of_experiment_grams, mouse.body_weight_end_of_experiment_grams
+                    bws.append([bw_start, bw_end, bw_end-bw_start])       # bw_pre, bw_post, bw_gain = bw_pre - bw_post
+
+                labels.append([mouse.groupNumber, mouse.mouseNumber])
+
+        return np.array(bws), np.array(labels)
 
 
     def generate_feature_vectors(self, feature='ASP', level='mouseday', bin_type='12bins',  
@@ -590,6 +607,7 @@ class Experiment(object):
         
         num_bins = int(bin_type.strip('bins').strip('AS').strip('cycles'))
         
+        # days_to_use = self.daysToUse if days is None else days
         if days is None:
             days_to_use = self.daysToUse 
             num_md = self.num_mousedays
@@ -597,7 +615,7 @@ class Experiment(object):
             days_to_use = days 
             num_md, _ = self.count_mousedays(days=days_to_use)
 
-        print "Exp: %s, %s\n%s, %s, bin_type: %s, err_type: %s,\ndays: %s, BIN_SHIFT: %s" %(
+        print "--Exp: %s, %s\n%s, %s, bin_type: %s, err_type: %s,\ndays: %s, BIN_SHIFT: %s" %(
                 self.short_name, self.generate_feature_vectors.__name__, 
                 feature, level, bin_type, err_type, 
                 days_to_use, self.BIN_SHIFT)
@@ -612,12 +630,15 @@ class Experiment(object):
                     if MD.dayNumber in days_to_use:
 
                         if MD.ignored:
+                            # md_data.append(np.nan)
                             md_data[cnt] = np.nan
                         
                         else:
+                            # md_data.append(MD.generate_feature_vector(feature, bin_type, GENERATE, VERBOSE))
                             md_data[cnt] = MD.generate_feature_vector(
                                                 feature, bin_type, GENERATE, VERBOSE)
 
+                        # md_labels.append((MD.groupNumber, MD.mouseNumber, MD.dayNumber))
                         md_labels[cnt] = MD.groupNumber, MD.mouseNumber, MD.dayNumber
 
                         if GENERATE and not VERBOSE:
@@ -625,7 +646,7 @@ class Experiment(object):
 
                         cnt +=1
 
-
+        
         cstop = time.clock()
         
         if GENERATE:

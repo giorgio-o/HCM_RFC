@@ -11,26 +11,26 @@ def add_variables_to_experiment(experiment):
     E = experiment
 
     E.xy_bins = [
-                    [2, 4],
-                    [12, 24], 
+                [2, 4],
+                [12, 24], 
                 ]
 
     E.levels = [
-                    'group',
-                    'mouse',
-                    'mouseday'
+                'group',
+                'mouse',
+                'mouseday'
                 ]
 
     E.bin_types = [
-                    '3cycles',      #24H,DC,LC
-                    '12bins',
-                    '24bins',
-                    'AS12bins'
+                '3cycles',      #24H,DC,LC
+                '12bins',
+                '24bins',
+                'AS12bins'
                 ]
 
     E.err_types = [
-                    'sd', 
-                    'sem'
+                'sd', 
+                'sem'
                 ]
 
     E.cycles = [
@@ -39,62 +39,62 @@ def add_variables_to_experiment(experiment):
                     'LC'
                 ]
     E.cycles_expanded = [
-                            '24Hours', 
-                            'Inactive State', 
-                            'Dark Cycle', 
-                            'Light Cycle', 
-                            'AS 24Hours', 
-                            'AS Dark Cycle', 
-                            'AS Light Cycle'
+                        '24Hours', 
+                        'Inactive State', 
+                        'Dark Cycle', 
+                        'Light Cycle', 
+                        'AS 24Hours', 
+                        'AS Dark Cycle', 
+                        'AS Light Cycle'
                         ]
 
     E.all_cycles = [
-                        '24H', 
-                        'IS', 
-                        'DC', 
-                        'LC', 
-                        'AS24H', 
-                        'ASDC', 
-                        'ASLC'
+                    '24H', 
+                    'IS', 
+                    'DC', 
+                    'LC', 
+                    'AS24H', 
+                    'ASDC', 
+                    'ASLC'
                     ]
 
     # attributes/features to save as npy
     E.HCM_variables = {
                        'txy_data': [
-                                        'CT',       # corrected X, Y, T: this is = backwardX so far. holds at_HB and non_HB Move
-                                        'CX', 
-                                        'CY',    
-                                        'recording_start_stop_time',
+                                    'CT',       # corrected X, Y, T: this is = backwardX so far. holds at_HB and non_HB Move
+                                    'CX', 
+                                    'CY',    
+                                    'recording_start_stop_time',
                                     ],
 
                         'timeSets': [ 
-                                        'F_timeSet',             # corrected by 'at_device' spatial constraint
-                                        'W_timeSet',
-                                        'at_F_timeSet',         # at feeder
-                                        'at_W_timeSet', 
-                                        'F_timeSet_uncorrected', # raw photobeam/lickometer data
-                                        'W_timeSet_uncorrected',
-                                        'device_F_position_error_timeSet',   # photobeam when not at feeder
-                                        'device_W_position_error_timeSet',
-                                        'devices_overlap_error_timeSet',     # devices firing at the same time
+                                    'F_timeSet',             # corrected by 'at_device' spatial constraint
+                                    'W_timeSet',
+                                    'at_F_timeSet',         # at feeder
+                                    'at_W_timeSet', 
+                                    'F_timeSet_uncorrected', # raw photobeam/lickometer data
+                                    'W_timeSet_uncorrected',
+                                    'device_F_position_error_timeSet',   # photobeam when not at feeder
+                                    'device_W_position_error_timeSet',
+                                    'devices_overlap_error_timeSet',     # devices firing at the same time
                                     ],
 
                         'idxs': [
-                                    'idx_at_F',         # bool, Move at Feeder CT timestamps index
-                                    'idx_at_W',
-                                    'idx_at_HB',        # bool, at HomeBase
+                                'idx_at_F',         # bool, Move at Feeder CT timestamps index
+                                'idx_at_W',
+                                'idx_at_HB',        # bool, at HomeBase
                                 ],
 
                         # 'position_data': ['bin_times_24H_xbins%d_ybins%d' %(x, y) for (x, y) in E.xy_bins],
 
                         'homebase': [ 
-                                        'rect_HB',      # nest/homebase rectangle, cage grid: (2,4)                
-                                        'obs_HB'      # obs by Ethel
+                                    'rect_HB',      # nest/homebase rectangle, cage grid: (2,4)                
+                                    'obs_HB'      # obs by Ethel
                                     ],
 
                         'qc': [
-                                'flagged',              # possibly ignored
-                                'flagged_msgs',            # reason
+                            'flagged',              # possibly ignored
+                            'flagged_msgs',            # reason
                             ], 
 
                         'to_compute': [
@@ -120,31 +120,31 @@ def add_variables_to_experiment(experiment):
                                     ],
 
                     'bouts': [
-                                'FB_timeSet', 
-                                'WB_timeSet', 
-                                'MB_timeSet', 
-                                'MB_idx',
+                            'FB_timeSet', 
+                            'WB_timeSet', 
+                            'MB_timeSet', 
+                            'MB_idx',
                             ],
 
                     'events': {
                                 'ingestion':{
                                     'coeffs' : [
-                                                    'FC', 
-                                                    'LC'
+                                                'FC', 
+                                                'LC'
                                                 ],
                                     'tots' : [
-                                                'FT', 
-                                                'WT'
+                                            'FT', 
+                                            'WT'
                                             ],
                                     'durs': ['FD','WD'],
                                     },
 
                                 'M': [
-                                        'delta_t',
-                                        'distance',
-                                        'velocity',
-                                        'angle',
-                                        'turning_angle'
+                                    'delta_t',
+                                    'distance',
+                                    'velocity',
+                                    'angle',
+                                    'turning_angle'
                                     ],
                         },
                     }  

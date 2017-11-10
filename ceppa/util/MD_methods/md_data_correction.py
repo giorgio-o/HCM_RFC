@@ -558,20 +558,24 @@ def correct_AS_without_move(self, amounts, bin_type, bin_num=None):
     elif self.experiment.short_name == 'HFD1':
         # correct as above HFD2
         if self.mouseNumber == 5737 and self.dayNumber == 5:
-            if bin_type == '24H':
-                _idx = 14
-            elif bin_type == 'LC':
-                _idx = 6
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        # 24H
+                    _idx = 14
+                elif bin_num == 2:      # LC
+                    _idx = 6
+
             elif bin_type == '12bins' and bin_num == 10:
                 _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 6:
-            if bin_type == '24H':
-                _idx = [0, 7, 10]
-            elif bin_type == 'DC':
-                _idx = 6
-            elif bin_type == 'LC':
-                _idx = [0, 3]
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        # 24H
+                    _idx = [0, 7, 10]
+                elif bin_num == 1:      # DC
+                    _idx = 6
+                elif bin_num == 2:      # LC
+                    _idx = [0, 3]
+
             elif bin_type == '12bins': 
                 if bin_num in [1, 10]:
                     _idx = 0
@@ -579,45 +583,53 @@ def correct_AS_without_move(self, amounts, bin_type, bin_num=None):
                     _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 7:
-            if bin_type == '24H':
-                _idx = [5, 10]
-            elif bin_type == 'DC':
-                _idx = 4
-            elif bin_type == 'LC':
-                _idx = 4
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:      
+                    _idx = [5, 10]
+                elif bin_num in [1, 2]:    
+                    _idx = 4
+
             elif bin_type == '12bins':
                 if bin_num in [7, 11]:
                     _idx = 0
 
         elif self.mouseNumber == 5737 and self.dayNumber == 8:
-            if bin_type == '24H':
-                _idx = 11
-            elif bin_type == 'LC':
-                _idx = 4
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = 11
+                elif bin_num == 2:     
+                    _idx = 4
+
             elif bin_type == '12bins' and bin_num == 10:
                 _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 9:
-            if bin_type == '24H':
-                _idx = 9
-            elif bin_type == 'DC':
-                _idx = 6
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = 9
+                elif bin_num == 1:     
+                    _idx = 6
+
             elif bin_type == '12bins' and bin_num == 7:
                 _idx = 2
 
         elif self.mouseNumber == 5737 and self.dayNumber == 10:
-            if bin_type == '24H':
-                _idx = 8
-            elif bin_type == 'DC':
-                _idx = 5
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = 8
+                elif bin_num == 1:     
+                    _idx = 5
+
             elif bin_type == '12bins' and bin_num == 6:
                 _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 11:
-            if bin_type == '24H':
-                _idx = [2, 12]
-            elif bin_type == 'LC':
-                _idx = [2, 3]
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = [2, 12]
+                elif bin_num == 2:     
+                    _idx = [2, 3]
+
             elif bin_type == '12bins':
                 if bin_num == 2:
                     _idx = 1
@@ -625,18 +637,20 @@ def correct_AS_without_move(self, amounts, bin_type, bin_num=None):
                     _idx = 0
 
         elif self.mouseNumber == 5737 and self.dayNumber == 12:
-            if bin_type == '24H':
-                _idx = 14
-            elif bin_type == 'LC':
-                _idx = 7
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = 14
+                elif bin_num == 2:     
+                    _idx = 7
+
             elif bin_type == '12bins' and bin_num == 10:
                 _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 13:
-            if bin_type == '24H':
-                _idx = [0, 2]
-            elif bin_type == 'LC':
-                _idx = [0, 2]
+            if bin_type.endswith('cycles'):
+                if bin_num in [0, 2]:        
+                    _idx = [0, 2]
+
             elif bin_type == '12bins':
                 if bin_num == 1:
                     _idx = 0
@@ -644,10 +658,12 @@ def correct_AS_without_move(self, amounts, bin_type, bin_num=None):
                     _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 14:
-            if bin_type == '24H':
-                _idx = [10, 15]
-            elif bin_type == 'DC':
-                _idx = [5, 10]
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = [10, 15]
+                elif bin_num == 1:     
+                    _idx = [5, 10]
+
             elif bin_type == '12bins':
                 if bin_num == 5:
                     _idx = 2
@@ -655,20 +671,24 @@ def correct_AS_without_move(self, amounts, bin_type, bin_num=None):
                     _idx = 0
 
         elif self.mouseNumber == 5737 and self.dayNumber == 15:
-            if bin_type == '24H':
-                _idx = [12, 15]
-            elif bin_type == 'LC':
-                _idx = [5, 8]
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = [12, 15]
+                elif bin_num == 2:     
+                    _idx = [5, 8]
+
             elif bin_type == '12bins' and bin_num in [9, 11]:
                 _idx = 1
 
         elif self.mouseNumber == 5737 and self.dayNumber == 16:
-            if bin_type == '24H':
-                _idx = [4, 10, 12]
-            if bin_type == 'DC':
-                _idx = 6
-            elif bin_type == 'LC':
-                _idx = [4, 5]
+            if bin_type.endswith('cycles'):
+                if bin_num == 0:        
+                    _idx = [4, 10, 12]
+                elif bin_num == 1:      
+                    _idx = 6
+                elif bin_num == 2:      
+                    _idx = [4, 5]
+
             elif bin_type == '12bins':
                 if bin_num == 2:
                     _idx = 1

@@ -16,13 +16,14 @@ Tecott Lab UCSF
 
 class HiFat1Experiment(Experiment): # subclass of Experiment
 
-    def __init__(self, name='HiFat1Experiment', IST=20., FBT=30., WBT=30., MBVT=1., MBDT=5., MBTT=0.2, IGNORE_MD=True, FULLNAME=True, use_days='acclimated'): 
+    def __init__(self, name='HiFat1Experiment', IST=20., FBT=30., WBT=30., MBVT=1., MBDT=5., MBTT=0.2, 
+            IGNORE_MD=True, FULLNAME=True, BIN_SHIFT=False, use_days='acclimated'): 
         
         self.exp_dir = dataDirRoot() + 'Experiments/HiFat1/'
 
-        Experiment.__init__(self, name, IST, FBT, WBT, MBVT, MBDT, MBTT, IGNORE_MD, FULLNAME, use_days) # have to explicitly call the superclass initializer
+        Experiment.__init__(self, name, IST, FBT, WBT, MBVT, MBDT, MBTT, IGNORE_MD, FULLNAME, BIN_SHIFT, use_days) # have to explicitly call the superclass initializer
 
-        self.short_name = 'HFD1_Exp'
+        self.short_name = 'HFD1'
         self.num_strains = 4
         self.initialize()
 
@@ -35,10 +36,10 @@ class HiFat1Experiment(Experiment): # subclass of Experiment
         print "initializing %s.." %self.name 
         # names for file i/o
         self.group_names = [
-                            'WTHF', 	# Wild Type/ High Fat
-                            '2CHF', 	# KnockOut/ High Fat
-                            'WTLF', 	# Wild Type/ Low Fat
-                            '2CLF', 	# KnockOut/ Low Fat
+                            'WTHF',     # Wild Type/ High Fat
+                            '2CHF',     # KnockOut/ High Fat
+                            'WTLF',     # Wild Type/ Low Fat
+                            '2CLF',     # KnockOut/ Low Fats
                             ]
         # You need to tell us a list of all MSIFiles:
         self.list_of_MSI_file_names = [
@@ -47,19 +48,21 @@ class HiFat1Experiment(Experiment): # subclass of Experiment
         # You need to tell us the decoding from MSI_files' group number codes to more human readable group names:
         # self.MSI_group_number_to_group_name_dictionary = dict(zip(range(len(self.group_names)), self.group_names))
         self.MSI_group_number_to_group_name_dictionary = {
-	        	1: 'WTHF', 2: '2CHF', 3: 'WTLF', 4: '2CLF'
-	            }
+                1: 'WTHF', 2: '2CHF', 3: 'WTLF', 4: '2CLF'
+                }
         self.numberOfIndividualsInGroup = {
-	            1: 17, 2: 16, 3: 15, 4: 16
-	            } 
+                1: 17, 2: 16, 3: 15, 4: 16
+                } 
         self.allPossibleGroupNumbers = range(1, 4+1)
-        self.allPossibleDayNumbers = range(1, 16+1) 	# Standard HCM, all special diet
-        self.nonAcclimationDayNumbers = range(5, 16+1)
+        self.allPossibleDayNumbers = range(1, 16+1)     # Standard HCM, all special diet
+        # self.nonAcclimationDayNumbers = range(5, 16+1)
         self.acclimationDayNumbers = range(1, 4+1)
         self.acclimatedDayNumbers = range(5, 16+1)
-        self.allExperimentDayNumbers = range(5, 16+1)
-        if self.use_days in ['acclimated', 'all']:
+        if self.use_days == 'acclimated':
             self.daysToUse = self.acclimatedDayNumbers
+
+        # time bin shift
+        self.binTimeShift = 0 if self.BIN_SHIFT else 0 
 
         # IST
         self.IST_in_minutes_by_group_name = {name: self.IST for name in self.group_names}
@@ -73,7 +76,7 @@ class HiFat1Experiment(Experiment): # subclass of Experiment
 
         # add ignored mice and mousedays
         if self.IGNORE_MD:
-	        self.add_ignored_data_labels()
+            self.add_ignored_data_labels()
         else:
             print "using all mousedays.."
         # add groups, mice, mousedays objects
@@ -128,8 +131,8 @@ class HiFat1Experiment(Experiment): # subclass of Experiment
     def get_groups_settings(self):        
         # strain_names for plotting
         self.group_number_to_full_group_name_dict = {
-	        1: 'WTHF', 2: '2CHF', 3: 'WTLF', 4: '2CLF'
-	        }
+            1: 'WTHF', 2: '2CHF', 3: 'WTLF', 4: '2CLF'
+            }
         self.strain_dict = {key: self.group_number_to_full_group_name_dict[key] for key in range(1, 5)}
         self.strain_names = [name for name in self.MSI_group_number_to_group_name_dictionary.values()]
         if self.FULLNAME:
@@ -150,4 +153,4 @@ class HiFat1Experiment(Experiment): # subclass of Experiment
 
 
 
-	
+    

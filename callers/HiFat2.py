@@ -5,7 +5,9 @@ import time
 from ceppa import HiFat2Experiment 
 from ceppa.visualizations import position_density_QC
 from ceppa.visualizations import rasters, raster_mouseday
-from ceppa.visualizations import features_panel_CT, some_features_stats_R01#, features_panel_expdays, features_activity_panel_CT#, features_distribution, features_panel_days#
+from ceppa.visualizations import features_panel_CT
+from ceppa.visualizations import HFD2_some_features_stats_R01, HFD2_more_features_stats_R01, HFD2_features_correlation_R01
+# from ceppa.visualizations import features_panel_expdays, features_activity_panel_CT#, features_distribution, features_panel_days#
 # from ceppa.visualizations import breakfast, breakfast_cycles, within_AS_structure, diet_chow_to_HF_transition
 # from ceppa.visualizations import time_budgets
 
@@ -53,10 +55,10 @@ cstart = time.clock()
 # # 4. FEATURES
 # keyList = ['active_states', 'totals', 'AS_intensities', 'bouts']
 # features = E.features_by_type['active_states'] + E.features_by_type['totals'] + E.features_by_type['AS_intensities'] 
-# features = E.features_by_type['bouts'][10:]
-# # features = ['MASInt']
+# features = E.features_by_type['active_states']
+# # # features = ['MASInt']
 
-# for bin_type in E.bin_types[1:2]:
+# for bin_type in E.bin_types[:2]:
 #     for feature in features:
 #         E.generate_feature_vectors(feature, bin_type=bin_type, GENERATE=True, VERBOSE=True)
 
@@ -157,11 +159,17 @@ cstart = time.clock()
 
 # # # for NIH - R01 grant, October 2017.
 E = HiFat2Experiment.HiFat2Experiment(IGNORE_MD=True, use_days='acclimated')
-some_features_stats_R01.bw_and_bw_gain_t_test(E)
-some_features_stats_R01.intake_and_distance(E)
-some_features_stats_R01.intake_DC_LC(E)
+# HFD2_some_features_stats_R01.bw_and_bw_gain_t_test(E)
+# HFD2_some_features_stats_R01.intake_and_distance(E)
+# HFD2_some_features_stats_R01.intake_DC_LC(E)
 
+# HFD2_more_features_stats_R01.two_way_anova_repeated_bodyweight(E)
+# HFD2_more_features_stats_R01.two_way_anova_repeated_features(E)
+HFD2_more_features_stats_R01.two_way_anova_repeated_dc_lc(E)
 
+# E_chow = HiFat2Experiment.HiFat2Experiment(IGNORE_MD=True, use_days='chow')
+# E_hf = HiFat2Experiment.HiFat2Experiment(IGNORE_MD=True, use_days='HiFat')
+# HFD2_features_correlation_R01.some_correlations(E_chow, E_hf)
 
 
 # look at features around transition days

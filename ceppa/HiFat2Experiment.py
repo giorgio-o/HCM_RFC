@@ -37,23 +37,23 @@ class HiFat2Experiment(Experiment): # subclass of Experiment
         print "initializing %s.." %self.name 
         # names for file i/o
         self.group_names = [
-                            'WT', 	# Wild Type/ High Fat
-                            '2C', 	# KnockOut/ High Fat
+                            'WT',   # Wild Type/ High Fat
+                            '2C',   # KnockOut/ High Fat
                             ]
         # You need to tell us a list of all MSIFiles:
         self.list_of_MSI_file_names = [self.exp_dir + 'hcmHFD2e2r1_MSI_FF.csv']
         # You need to tell us the decoding from MSI_files' group number codes to more human readable group names:
         # self.MSI_group_number_to_group_name_dictionary = dict(zip(range(len(self.group_names)), self.group_names))
         self.MSI_group_number_to_group_name_dictionary = {
-	        	1: 'WT', 2: '2C'
-	            }
+                1: 'WT', 2: '2C'
+                }
         self.numberOfIndividualsInGroup = {
-	            1: 15, 2: 15
-	            } 
+                1: 15, 2: 15
+                } 
         self.allPossibleGroupNumbers = [1, 2]
         self.allPossibleDayNumbers = range(1, 28+1) 
         self.acclimationDayNumbers = range(1, 4+1)
-        self.acclimatedDayNumbers = range(5, 28+1)	
+        self.acclimatedDayNumbers = range(5, 28+1)  
         
         self.chowDayNumbers = range(5, 12+1)
         self.allHiFatDayNumbers = range(13, 28+1)
@@ -103,7 +103,7 @@ class HiFat2Experiment(Experiment): # subclass of Experiment
 
         # add ignored mice and mousedays
         if self.IGNORE_MD:
-	        self.add_ignored_data_labels()
+            self.add_ignored_data_labels()
         else:
             print "using all mousedays.."
         # add groups, mice, mousedays objects
@@ -179,4 +179,4 @@ class HiFat2Experiment(Experiment): # subclass of Experiment
 
 
 
-	
+    

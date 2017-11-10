@@ -5,8 +5,9 @@ import time
 from ceppa import HiFat1Experiment 
 from ceppa.visualizations import position_density 
 from ceppa.visualizations import rasters, raster_mouseday
-from ceppa.visualizations import features_panel_CT#, features_panel_expdays, features_distribution
-from ceppa.visualizations import breakfast, breakfast_cycles, within_AS_structure, time_budgets
+from ceppa.visualizations import HFD1_features_correlation_R01, HFD1_more_features_stats_R01
+# from ceppa.visualizations import features_panel_CT#, features_panel_expdays, features_distribution
+# from ceppa.visualizations import breakfast, breakfast_cycles, within_AS_structure, time_budgets
 
 """
 G.Onnis, 03.2017
@@ -34,6 +35,20 @@ cstart = time.clock()
 # # 2. ACTIVE STATES
 # E.generate_active_states()
 
+
+# # 4. FEATURES
+# keyList = ['active_states', 'totals', 'AS_intensities', 'bouts']
+# features = E.features_by_type['active_states'] + E.features_by_type['totals'] + E.features_by_type['AS_intensities'] 
+# features = E.features_by_type['AS_intensities'][2:]
+# features = ['MASInt']
+
+
+# for bin_type in E.bin_types[:2]:
+#     for feature in features:
+#         E.generate_feature_vectors(feature, bin_type=bin_type, GENERATE=True, VERBOSE=True)
+
+
+
 # test the bastards
 # E.test_features()
 
@@ -43,22 +58,9 @@ cstart = time.clock()
 
 
 # # FIGURES
-E = HiFat1Experiment.HiFat1Experiment()
+# E = HiFat1Experiment.HiFat1Experiment()
 # E.get_exp_info()
 
-xy_bins = [
-    [2, 4],
-    [12, 24], 
-    ]
-
-levels = [
-    'strain',
-    'mouse',
-    'mouseday'
-    ]
-
-bin_types = ['24HDCLC', '12bins']
-err_types = ['stdev', 'stderr']
 
 
 # # 1. POSITION DENSITY 
@@ -94,17 +96,21 @@ err_types = ['stdev', 'stderr']
 
 
 # # # 3. FEATURES
-# E = HiFat1Experiment.HiFat1Experiment(IGNORE_MD=False)
-# keyList = ['active_states', 'totals', 'AS_intensities', 'bouts']
-# features = E.features_by_type['active_states'] + E.features_by_type['totals'] + E.features_by_type['AS_intensities']
-# features = E.features_by_type['bouts'][:5]
-
-# generate
-# for bin_type in bin_types[1:]:
-#     for feature in features:
-#         E.generate_feature_vectors(feature, bin_type, GENERATE=True, VERBOSE=True)
-
 # panel
+E = HiFat1Experiment.HiFat1Experiment(IGNORE_MD=True)
+
+# HFD1_features_correlation_R01.some_features_correlation(E)
+
+HFD1_more_features_stats_R01.two_way_anova_repeated_bodyweight(E)
+# HFD1_more_features_stats_R01.two_way_anova_repeated_features(E)
+# HFD1_more_features_stats_R01.two_way_anova_repeated_dc_lc(E)
+
+
+# for bin_type in E.bin_types[:1]:
+#     for level in E.levels[:1]:
+#         for err_type in E.err_types:
+#             features_panel_CT.plot_features_panel(E, level, bin_type, err_type)
+
 # for bin_type in bin_types[:1]:
 #     for level in levels:
 #         features_panel_CT.plot_features_panel(E, bin_type, level, COMMON_Y=True)
@@ -155,8 +161,8 @@ err_types = ['stdev', 'stderr']
 
 
 # # 7. TIME BUDGETS
-for cycle in E.cycles:
-	E.generate_time_budgets(cycle=cycle, AS=False, GENERATE=True, VERBOSE=True)
+# for cycle in E.cycles:
+# 	E.generate_time_budgets(cycle=cycle, AS=False, GENERATE=True, VERBOSE=True)
     # time_budgets.plot_time_budgets(E, level='strain', cycle=cycle)
 
 
