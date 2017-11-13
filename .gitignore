@@ -2,4 +2,11 @@
 *.ipynb_checkpoints
 *.log
 
+.idea/
+examples/
+figs/
+notebooks/
+pyvttbl_env/
+untitled.py
+
 
